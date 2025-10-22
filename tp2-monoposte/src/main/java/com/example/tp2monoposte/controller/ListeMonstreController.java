@@ -6,35 +6,34 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class GestionController {
+public class ListeMonstreController {
 
     @FXML private ImageView logoMonstre;
+    @FXML private Button btnConnexion;
     @FXML private TextField nomField;
     @FXML private ComboBox<String> familleCombo;
     @FXML private ComboBox<String> armeCombo;
-    @FXML private Spinner<Integer> pvSpinner;
+    @FXML private Spinner<Integer> minPvSpinner;
+    @FXML private Spinner<Integer> maxPvSpinner;
+    @FXML private Button btnRechercher;
+    @FXML private Button btnEffacerForm;
     @FXML private TableView<Monstre> tableMonstres;
     @FXML private TableColumn<Monstre, String> colNom;
     @FXML private TableColumn<Monstre, String> colFamille;
     @FXML private TableColumn<Monstre, String> colArme;
     @FXML private TableColumn<Monstre, Integer> colPv;
-    @FXML private Button btnAjouter;
-    @FXML private Button btnEffacerForm;
+    @FXML private Button btnEffacerSelection;
     @FXML private Button btnQuitter;
-    @FXML private Button btnDeconnexion;
 
     private final ObservableList<Monstre> monstres = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
-        // Colonnes
+        // Initialisation des colonnes
         colNom.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNom()));
         colFamille.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getFamille()));
         colArme.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getArme()));
@@ -42,59 +41,36 @@ public class GestionController {
 
         tableMonstres.setItems(monstres);
 
-        // ComboBox et Spinner
+        // Spinner valeurs par défaut
+        minPvSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500, 0));
+        maxPvSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500, 500));
+
+        // ComboBox familles et armes
         familleCombo.getItems().addAll("Orc", "Démon", "Dragon", "Canidé", "Vampire");
         armeCombo.getItems().addAll("Épée", "Griffe", "Magie", "Dent", "Feu");
-        pvSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
-
-
-
-        // Désactiver le bouton Ajouter si un champ n’est pas rempli
-        btnAjouter.disableProperty().bind(
-                nomField.textProperty().isEmpty()
-                        .or(familleCombo.valueProperty().isNull())
-                        .or(armeCombo.valueProperty().isNull())
-        );
     }
 
     @FXML
-    private void onAjouter(ActionEvent e) {
-        String nom = nomField.getText();
-        String famille = familleCombo.getValue();
-        String arme = armeCombo.getValue();
-        int pv = pvSpinner.getValue();
-
-        if (nom.isEmpty() || famille == null || arme == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Champs manquants");
-            alert.setHeaderText(null);
-            alert.setContentText("Veuillez remplir tous les champs avant d’ajouter un monstre.");
-            alert.showAndWait();
-            return;
-        }
-
-        Monstre nouveau = new Monstre(nom, famille, arme, pv);
-        tableMonstres.getItems().add(nouveau);
-        effacerFormulaire();
-
-        // Ouvrir la fenêtre de recherche après ajout
-        try {
-            MainApplication.showRechercheMonstre();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    private void onRechercher(ActionEvent e) {
+        // Ici, tu peux filtrer la liste des monstres selon les champs saisis
+        System.out.println("Recherche monstre : " + nomField.getText());
     }
 
     @FXML
     private void onEffacerForm(ActionEvent e) {
-        effacerFormulaire();
-    }
-
-    private void effacerFormulaire() {
         nomField.clear();
         familleCombo.getSelectionModel().clearSelection();
         armeCombo.getSelectionModel().clearSelection();
-        pvSpinner.getValueFactory().setValue(50);
+        minPvSpinner.getValueFactory().setValue(0);
+        maxPvSpinner.getValueFactory().setValue(500);
+    }
+
+    @FXML
+    private void onEffacerSelection(ActionEvent e) {
+        Monstre selected = tableMonstres.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            monstres.remove(selected);
+        }
     }
 
     @FXML
@@ -103,10 +79,8 @@ public class GestionController {
     }
 
     @FXML
-    private void onDeconnexion(ActionEvent e) {
+    private void onConnexion(ActionEvent e) {
         try {
-            Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            stage.close();
             MainApplication.showLogin();
         } catch (Exception ex) {
             ex.printStackTrace();

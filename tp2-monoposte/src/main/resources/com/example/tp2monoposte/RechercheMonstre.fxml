@@ -4,10 +4,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
-
 <?import javafx.scene.image.Image?>
+
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.tp2monoposte.controller.GestionController"
+            fx:controller="com.example.tp2monoposte.controller.ListeMonstreController"
             prefWidth="900" prefHeight="700">
 
     <!-- Haut -->
@@ -17,20 +17,17 @@
                 <Insets top="12.0" right="12.0" bottom="12.0" left="12.0"/>
             </padding>
 
-            <!-- Image du monstre -->
             <ImageView fx:id="logoMonstre" fitHeight="108.0" fitWidth="116.0">
                 <Image url="@../../image/Monstre.jpg" />
             </ImageView>
 
-            <!-- Titre -->
             <Label text="Liste de monstres"
                    style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2d502d;"/>
 
-            <!-- espace flexible -->
             <Pane HBox.hgrow="ALWAYS"/>
 
-            <!-- Bouton connexion -->
             <Button text="Se connecter" fx:id="btnConnexion"
+                    onAction="#onConnexion"
                     style="-fx-background-color: #f2f2f2; -fx-border-color: gray;"/>
         </HBox>
     </top>
@@ -42,7 +39,6 @@
                 <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
             </padding>
 
-            <!-- Section de recherche -->
             <Label text="Rechercher" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
             <TextField fx:id="nomField" promptText="Nom" maxWidth="220"/>
@@ -62,15 +58,15 @@
                 </HBox>
             </VBox>
 
-            <!-- Boutons recherche -->
             <HBox spacing="12.0" alignment="CENTER_LEFT">
                 <Button text="Rechercher monstre" fx:id="btnRechercher"
+                        onAction="#onRechercher"
                         style="-fx-background-color: green; -fx-text-fill: white; -fx-font-weight: bold;"/>
                 <Button text="Effacer formulaire" fx:id="btnEffacerForm"
+                        onAction="#onEffacerForm"
                         style="-fx-background-color: yellow; -fx-font-weight: bold;"/>
             </HBox>
 
-            <!-- Table -->
             <TableView fx:id="tableMonstres" prefHeight="320">
                 <columns>
                     <TableColumn fx:id="colNom" text="Nom" prefWidth="200"/>
@@ -90,9 +86,11 @@
             </padding>
 
             <Button text="Effacer la sélection" fx:id="btnEffacerSelection"
+                    onAction="#onEffacerSelection"
                     style="-fx-background-color: yellow; -fx-font-weight: bold;"/>
             <Pane HBox.hgrow="ALWAYS"/>
             <Button text="Quitter" fx:id="btnQuitter"
+                    onAction="#onQuitter"
                     style="-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold;"/>
         </HBox>
     </bottom>
