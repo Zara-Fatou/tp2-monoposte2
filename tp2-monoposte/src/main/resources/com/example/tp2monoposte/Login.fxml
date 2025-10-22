@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tp2monoposte.controller.LoginController"
+            style="-fx-background-color: lightblue;">
+
+    <center>
+        <VBox spacing="15" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Titre -->
+            <Label text="Identifiez-vous"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <!-- Champs utilisateur -->
+            <TextField fx:id="usernameField" promptText="Nom usager" maxWidth="200"/>
+            <PasswordField fx:id="passwordField" promptText="Mot de passe" maxWidth="200"/>
+
+            <!-- Boutons -->
+            <Button text="Gérer la liste des monstres"
+                    fx:id="btnLogin"
+                    onAction="#onLoginClicked"
+                    style="-fx-background-color: green; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+            <Button text="Annuler"
+                    fx:id="btnCancel"
+                    onAction="#onCancelClicked"
+                    style="-fx-background-color: khaki;"/>
+
+            <!-- Message d'erreur -->
+            <Label fx:id="errorLabel" textFill="red" visible="false"
+                   text="Nom d'utilisateur ou mot de passe invalide"/>
+        </VBox>
+    </center>
+</BorderPane>

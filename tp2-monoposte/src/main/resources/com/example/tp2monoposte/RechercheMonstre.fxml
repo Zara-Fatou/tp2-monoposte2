@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<?import javafx.scene.image.Image?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tp2monoposte.controller.GestionController"
+            prefWidth="900" prefHeight="700">
+
+    <!-- Haut -->
+    <top>
+        <HBox style="-fx-background-color: #a7d7a7;" spacing="15.0" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="12.0" right="12.0" bottom="12.0" left="12.0"/>
+            </padding>
+
+            <!-- Image du monstre -->
+            <ImageView fx:id="logoMonstre" fitHeight="108.0" fitWidth="116.0">
+                <Image url="@../../image/Monstre.jpg" />
+            </ImageView>
+
+            <!-- Titre -->
+            <Label text="Liste de monstres"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2d502d;"/>
+
+            <!-- espace flexible -->
+            <Pane HBox.hgrow="ALWAYS"/>
+
+            <!-- Bouton connexion -->
+            <Button text="Se connecter" fx:id="btnConnexion"
+                    style="-fx-background-color: #f2f2f2; -fx-border-color: gray;"/>
+        </HBox>
+    </top>
+
+    <!-- Centre -->
+    <center>
+        <VBox spacing="20.0">
+            <padding>
+                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+            </padding>
+
+            <!-- Section de recherche -->
+            <Label text="Rechercher" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <TextField fx:id="nomField" promptText="Nom" maxWidth="220"/>
+
+            <HBox spacing="15.0">
+                <ComboBox fx:id="familleCombo" promptText="Famille" prefWidth="160"/>
+                <ComboBox fx:id="armeCombo" promptText="Arme" prefWidth="160"/>
+            </HBox>
+
+            <VBox spacing="8.0">
+                <Label text="Plage des points de vie" style="-fx-font-size: 14px;"/>
+                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                    <Label text="Min."/>
+                    <Spinner fx:id="minPvSpinner" prefWidth="70"/>
+                    <Label text="Max."/>
+                    <Spinner fx:id="maxPvSpinner" prefWidth="70"/>
+                </HBox>
+            </VBox>
+
+            <!-- Boutons recherche -->
+            <HBox spacing="12.0" alignment="CENTER_LEFT">
+                <Button text="Rechercher monstre" fx:id="btnRechercher"
+                        style="-fx-background-color: green; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button text="Effacer formulaire" fx:id="btnEffacerForm"
+                        style="-fx-background-color: yellow; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <!-- Table -->
+            <TableView fx:id="tableMonstres" prefHeight="320">
+                <columns>
+                    <TableColumn fx:id="colNom" text="Nom" prefWidth="200"/>
+                    <TableColumn fx:id="colFamille" text="Famille" prefWidth="200"/>
+                    <TableColumn fx:id="colArme" text="Arme" prefWidth="200"/>
+                    <TableColumn fx:id="colPv" text="Points de vie" prefWidth="200"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- Bas -->
+    <bottom>
+        <HBox spacing="10.0" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0"/>
+            </padding>
+
+            <Button text="Effacer la sélection" fx:id="btnEffacerSelection"
+                    style="-fx-background-color: yellow; -fx-font-weight: bold;"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Quitter" fx:id="btnQuitter"
+                    style="-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </HBox>
+    </bottom>
+</BorderPane>
