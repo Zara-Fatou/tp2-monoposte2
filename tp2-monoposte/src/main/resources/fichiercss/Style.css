@@ -1,77 +1,113 @@
-/* Barre du haut */
+/* ============================
+   STYLE GLOBAL
+============================ */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f5fff5; /* vert pâle */
+}
+
+.label {
+    -fx-text-fill: #2d502d;
+}
+
+.button {
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 6 12;
+}
+
+/* ============================
+   BARRES SUPÉRIEURES
+============================ */
 .hbox-top {
-    -fx-background-color: lightgreen;
+    -fx-background-color: linear-gradient(to right, #b4e1b4, #a0d3a0);
     -fx-padding: 10;
     -fx-spacing: 15;
     -fx-alignment: CENTER_LEFT;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 2);
 }
 
 .label-titre {
-    -fx-font-size: 22px;
+    -fx-font-size: 26px;
     -fx-font-weight: bold;
-    -fx-text-fill: darkgreen;
+    -fx-text-fill: #204020;
 }
 
-/* Bouton connexion */
-#btnConnexion {
-    -fx-background-color: lightgray;
-    -fx-text-fill: black;
-}
-
-/* Section de recherche */
-.label-section {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-}
-
+/* ============================
+   CHAMPS DE FORMULAIRE
+============================ */
 .text-field, .combo-box, .spinner {
-    -fx-pref-width: 150;
+    -fx-pref-width: 200;
     -fx-background-color: white;
-    -fx-border-color: lightgray;
-    -fx-border-radius: 4;
-    -fx-padding: 4;
+    -fx-border-color: #d0d0d0;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 6;
 }
 
-/* Boutons de recherche */
-#btnRechercher {
-    -fx-background-color: green;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-}
-
-#btnEffacerForm {
-    -fx-background-color: yellow;
-    -fx-text-fill: black;
-}
-
-/* Table des monstres */
+/* ============================
+   TABLES
+============================ */
 .table-view {
-    -fx-border-color: black;           /* Bordure autour du tableau */
-    -fx-border-width: 1px;
-    -fx-border-style: solid;
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.15), 3, 0, 0, 2);
 }
 
 .table-row-cell {
-    -fx-border-color: lightgray;       /* Ligne horizontale entre les lignes */
-    -fx-border-width: 0 0 1px 0;       /* Bordure en bas seulement */
-    -fx-border-style: solid;
+    -fx-border-color: #e0e0e0;
 }
 
-.table-cell {
-    -fx-border-color: lightgray;       /* Ligne verticale entre les colonnes */
-    -fx-border-width: 0 1px 0 0;       /* Bordure à droite seulement */
-    -fx-border-style: solid;
+.table-row-cell:selected {
+    -fx-background-color: #b4e1b4;
 }
 
+/* ============================
+   BOUTONS SPÉCIFIQUES
+============================ */
+#btnConnexion, #btnDeconnexion {
+    -fx-background-color: #e8e8e8;
+    -fx-border-color: #c0c0c0;
+}
 
-/* Bas de page */
-#btnEffacerSelection {
-    -fx-background-color: yellow;
-    -fx-text-fill: black;
+#btnLogin, #btnRechercher {
+    -fx-background-color: #2e8b57;
+    -fx-text-fill: white;
+}
+
+#btnEffacerForm, #btnEffacerSelection {
+    -fx-background-color: #ffea70;
+    -fx-text-fill: #333;
+}
+
+#btnCancel {
+    -fx-background-color: #ffe699;
 }
 
 #btnQuitter {
-    -fx-background-color: red;
+    -fx-background-color: #e74c3c;
     -fx-text-fill: white;
+}
+
+/* ============================
+   TITRES SECTIONS
+============================ */
+.label-section {
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
+    -fx-text-fill: #2d502d;
+}
+
+/* ============================
+   ESPACE CENTRAL
+============================ */
+.vbox-main {
+    -fx-alignment: TOP_CENTER;
+    -fx-spacing: 15;
+    -fx-padding: 15;
 }

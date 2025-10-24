@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 public class LoginController {
 
     public Button btnLogin;
+    public Button btnCancel;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;

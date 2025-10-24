@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainApplication extends Application {
 
@@ -14,14 +15,16 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        showLogin(); // Démarre avec la page de connexion
+        showListeDeMonstre(); // Démarre avec la page de connexion
     }
 
     /** Affiche la page de connexion */
     public static void showLogin() throws IOException {
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("/com/example/tp2monoposte/Login.fxml"));
-        Scene scene = new Scene(loader.load(), 600, 400);
-        scene.getStylesheets().add(MainApplication.class.getResource("/fichiercss/Style.css").toExternalForm());
+        Scene scene = new Scene(loader.load(), 900, 900);
+        scene.getStylesheets().add(
+                Objects.requireNonNull(MainApplication.class.getResource("/fichiercss/Style.css")).toExternalForm()
+        );
 
         primaryStage.setTitle("Connexion");
         primaryStage.setScene(scene);
@@ -34,7 +37,9 @@ public class MainApplication extends Application {
     public static void showGestionMonstre() throws IOException {
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("/com/example/tp2monoposte/GestionMonstre.fxml"));
         Scene scene = new Scene(loader.load(), 1000, 700);
-        scene.getStylesheets().add(MainApplication.class.getResource("/fichiercss/Style.css").toExternalForm());
+        scene.getStylesheets().add(
+                Objects.requireNonNull(MainApplication.class.getResource("/fichiercss/Style.css")).toExternalForm()
+        );
 
         primaryStage.setTitle("Gestion des monstres");
         primaryStage.setScene(scene);
@@ -44,10 +49,12 @@ public class MainApplication extends Application {
     }
 
     /** Affiche la page de recherche/ajout de monstre */
-    public static void showRechercheMonstre() throws IOException {
-        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("/com/example/tp2monoposte/RechercheMonstre.fxml"));
-        Scene scene = new Scene(loader.load(), 800, 600);
-        scene.getStylesheets().add(MainApplication.class.getResource("/fichiercss/Style.css").toExternalForm());
+    public static void showListeDeMonstre() throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("/com/example/tp2monoposte/ListeDeMonstre.fxml"));
+        Scene scene = new Scene(loader.load(), 900, 800);
+        scene.getStylesheets().add(
+                Objects.requireNonNull(MainApplication.class.getResource("/fichiercss/Style.css")).toExternalForm()
+        );
 
         primaryStage.setTitle("Recherche de monstres");
         primaryStage.setScene(scene);

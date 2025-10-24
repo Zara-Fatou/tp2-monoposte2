@@ -2,6 +2,7 @@ package com.example.tp2monoposte.controller;
 
 import com.example.tp2monoposte.MainApplication;
 import com.example.tp2monoposte.modele.Monstre;
+import com.example.tp2monoposte.repository.MonstreRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,7 +16,10 @@ import java.io.IOException;
 
 public class GestionController {
 
-    @FXML private ImageView logoMonstre;
+
+    public Button btnQuitter;
+    public Button btnDeconnexion;
+    public Button btnEffacerForm;
     @FXML private TextField nomField;
     @FXML private ComboBox<String> familleCombo;
     @FXML private ComboBox<String> armeCombo;
@@ -26,21 +30,14 @@ public class GestionController {
     @FXML private TableColumn<Monstre, String> colArme;
     @FXML private TableColumn<Monstre, Integer> colPv;
     @FXML private Button btnAjouter;
-    @FXML private Button btnEffacerForm;
-    @FXML private Button btnQuitter;
-    @FXML private Button btnDeconnexion;
+
 
     private final ObservableList<Monstre> monstres = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
         // Colonnes
-        colNom.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNom()));
-        colFamille.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getFamille()));
-        colArme.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getArme()));
-        colPv.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getPointsVie()).asObject());
-
-        tableMonstres.setItems(monstres);
+        ListeMonstreController.selectionnerNom(colNom, colFamille, colArme, colPv, tableMonstres, monstres);
 
         // ComboBox et Spinner
         familleCombo.getItems().addAll("Orc", "Démon", "Dragon", "Canidé", "Vampire");
@@ -74,14 +71,14 @@ public class GestionController {
         }
 
         Monstre nouveau = new Monstre(nom, famille, arme, pv);
-        tableMonstres.getItems().add(nouveau);
+        MonstreRepository.ajouterMonstre(nouveau); // Ajout global
+
         effacerFormulaire();
 
-        // Ouvrir la fenêtre de recherche après ajout
         try {
-            MainApplication.showRechercheMonstre();
+            MainApplication.showListeDeMonstre();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Impossible d'ouvrir la fenetre!");
         }
     }
 
@@ -109,7 +106,7 @@ public class GestionController {
             stage.close();
             MainApplication.showLogin();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("Deconnexion impossible!");
         }
     }
 }
